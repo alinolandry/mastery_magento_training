@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Alain Landry Noutchomwo, Inc. All rights reserved.
+ * Full-Stack Magento Developer.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" label="Customer My Account (All Pages)" design_abstraction="custom">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Magento\Customer\Block\Account\SortLinkInterface" name="customer-account-navigation-todo-link">
+                <arguments>
+                    <argument name="path" xsi:type="string">todo</argument>
+                    <argument name="label" translate="true" xsi:type="string">My Todo List</argument>
+                    <argument name="sortOrder" xsi:type="number">300</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
