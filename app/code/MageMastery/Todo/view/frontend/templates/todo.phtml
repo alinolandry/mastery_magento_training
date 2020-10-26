@@ -9,3 +9,16 @@ use Magento\Framework\View\Element\Template;
     <li> Task 2 </li>
     <li> Task 3 </li>
 </ul>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "todo": {
+                        "component": "MageMastery_Todo/js/view/todo"
+                    }
+                }
+            }
+        }
+    }
+</script>
