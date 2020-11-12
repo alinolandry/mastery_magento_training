@@ -1,5 +1,8 @@
 define(['uiComponent'], function (Component) {
     'use strict';
-    console.log("I m here");
-    return Component.extends({});
+    return Component.extends({
+        default: {
+            template: 'MageMastery_Todo/todo'
+        }
+    });
 });
