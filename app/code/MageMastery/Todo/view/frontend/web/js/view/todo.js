@@ -11,7 +11,7 @@ define([
                 {id: 2, label: "Task 2", status: true},
                 {id: 3, label: "Task 3", status: false},
                 {id: 4, label: "Task 4", status: true},
-            ],
+            ]
         },
 
         initObservable: function () {

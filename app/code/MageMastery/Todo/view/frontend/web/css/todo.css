@@ -24,5 +24,6 @@ ul.tasks li .status.open{
 }
 ul.tasks li .status.complete{
     border: 2px solid #ccc;
+    background: #82cc78;
 }
 
