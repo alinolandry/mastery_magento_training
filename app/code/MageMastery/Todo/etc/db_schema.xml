@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="magemastery_todo_task" resource="default" comment="TODO Tasks">
+        <column xsi:type="int" name="task_id" identity="true" comment="Task ID"/>
+        <column xsi:type="varchar" name="label" nullable="false" length="255" comment="Task Label"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="255" default="open" comment="Status"/>
+        <column xsi:type="int" name="customer_id" nullable="true" padding="10" unsigned="true" identity="false" comment="Customer ID"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="task_id"/>
+        </constraint>
+
+        <constraint xsi:type="foreign"
+                    referenceId="CUSTOMER_ID_REFERENCE"
+                    table="magemastery_todo_task"
+                    column="customer_id"
+                    referenceTable="customer_entity"
+                    referenceColumn="entity_id"
+                    onDelete="CASCADE"
+        />
+
+    </table>
+</schema>
+
