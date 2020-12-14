@@ -1,12 +1,15 @@
 <?php
 
-
 namespace MageMastery\Todo\Service;
 
-
+use MageMastery\Todo\Api\Data\TaskSearchResultInterface;
+use MageMastery\Todo\Api\Data\TaskSearchResultInterfaceFactory;
 use MageMastery\Todo\Api\TaskRepositoryInterface;
-use MageMastery\Todo\Model\TaskFactory;
 use MageMastery\Todo\Model\ResourceModel\Task;
+use MageMastery\Todo\Model\TaskFactory;
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Api\SearchResultsInterface;
 
 class TaskRepository implements TaskRepositoryInterface
 {
@@ -21,20 +24,42 @@ class TaskRepository implements TaskRepositoryInterface
     private $taskFactory;
 
     /**
+     * @var TaskSearchResultInterfaceFactory
+     */
+    private $searchResultsFactory;
+
+    /**
+     * @var CollectionProcessorInterface
+     */
+    private $collectionProcessor;
+
+
+    /**
      * TaskRepository constructor.
      * @param Task $resource
      * @param TaskFactory $taskFactory
+     * @param CollectionProcessorInterface $collectionProcessor
+     * @param TaskSearchResultInterfaceFactory $searchResultFactory
      */
-    public function __construct(Task $resource, TaskFactory $taskFactory)
-    {
+    public function __construct(
+        Task $resource,
+        TaskFactory $taskFactory,
+        CollectionProcessorInterface $collectionProcessor,
+        TaskSearchResultInterfaceFactory $searchResultFactory
+    ) {
         $this->resource = $resource;
         $this->taskFactory = $taskFactory;
+        $this->collectionProcessor = $collectionProcessor;
+        $this->searchResultsFactory = $searchResultFactory;
     }
 
-
-    public function getList()
+    public function getList(SearchCriteriaInterface $searchCriteria): TaskSearchResultInterface
     {
-        // TODO: Implement getList() method.
+        $searchResult = $this->searchResultsFactory->create();
+        $searchResult->setSearchCriteria($searchCriteria);
+        $this->collectionProcessor->process($searchCriteria, $searchResult);
+
+        return $searchResult;
     }
 
     public function get(int $taskId)
