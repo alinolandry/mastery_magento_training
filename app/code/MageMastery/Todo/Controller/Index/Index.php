@@ -4,6 +4,7 @@ namespace MageMastery\Todo\Controller\Index;
 
 use MageMastery\Todo\Model\ResourceModel\Task as TaskResource;
 use MageMastery\Todo\Model\TaskFactory;
+use MageMastery\Todo\Service\TaskRepository;
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;
@@ -14,8 +15,18 @@ class Index extends Action
 
     private $taskFactory;
 
-    public function __construct(Context $context, TaskFactory $taskFactory, TaskResource $taskResource)
-    {
+    /**
+     * @var TaskRepository
+     */
+    private $taskRepository;
+
+    public function __construct(
+        Context $context,
+        TaskFactory $taskFactory,
+        TaskResource $taskResource,
+        TaskRepository $taskRepository
+    ) {
+        $this->taskRepository = $taskRepository;
         $this->taskFactory = $taskFactory;
         $this->taskResource = $taskResource;
         parent::__construct($context);
@@ -23,6 +34,9 @@ class Index extends Action
 
     public function execute()
     {
+        $task = $this->taskRepository->get(1);
+        var_dump($task->getData());
+        /*
         $task = $this->taskFactory->create();
 
         $task->setData([
@@ -32,6 +46,7 @@ class Index extends Action
         ]);
 
         $this->taskResource->save($task);
+        */
         return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }
 }
