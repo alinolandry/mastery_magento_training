@@ -3,6 +3,8 @@
 
 namespace MageMastery\Todo\Api;
 
+use MageMastery\Todo\Api\Data\TaskInterface;
+
 /**
  * @api
  * Interface TaskManagementInterface
@@ -10,6 +12,6 @@ namespace MageMastery\Todo\Api;
  */
 interface TaskManagementInterface
 {
-    public function save();
-    public function delete();
+    public function save(TaskInterface $task);
+    public function delete(TaskInterface $task);
 }
