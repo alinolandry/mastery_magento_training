@@ -1,16 +1,12 @@
 <?php
 
-
 namespace MageMastery\Todo\Model\ResourceModel\Task;
 
-
-use MageMastery\Todo\Api\Data\TaskInterface;
 use MageMastery\Todo\Api\Data\TaskSearchResultInterface;
-use Magento\Framework\Api\SearchCriteriaInterface;
-use Magento\Framework\Api\SearchResultsInterface;
-use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
-use MageMastery\Todo\Model\Task;
 use MageMastery\Todo\Model\ResourceModel\Task as TaskResource;
+use MageMastery\Todo\Model\Task;
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 
 class Collection extends AbstractCollection implements TaskSearchResultInterface
 {
@@ -46,7 +42,6 @@ class Collection extends AbstractCollection implements TaskSearchResultInterface
         return $this;
     }
 
-
     /**
      * Get total count.
      *
@@ -74,10 +69,10 @@ class Collection extends AbstractCollection implements TaskSearchResultInterface
      */
     public function setItems(array $items = null)
     {
-        if(!$items){
+        if (!$items) {
             return $this;
         }
-        foreach ($items as $item){
+        foreach ($items as $item) {
             $this->addItem($item);
         }
         return $this;
