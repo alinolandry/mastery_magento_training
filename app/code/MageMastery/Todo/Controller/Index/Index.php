@@ -47,6 +47,7 @@ class Index extends Action
 
     public function execute()
     {
+        /*
         $task = $this->taskRepository->get(1);
         $task->setData('status', 'complete');
 
@@ -65,6 +66,6 @@ class Index extends Action
 
         $this->taskResource->save($task);
         */
-       // return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
+        return $this->resultFactory->create(ResultFactory::TYPE_PAGE);
     }
 }
