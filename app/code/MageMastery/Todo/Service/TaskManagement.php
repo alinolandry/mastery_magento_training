@@ -22,7 +22,13 @@ class TaskManagement implements TaskManagementInterface
 
     public function save(TaskInterface $task)
     {
-        $this->resource->save($task);
+        \Magento\Framework\App\ObjectManager::getInstance()->get('Psr\Log\LoggerInterface')->debug('here is good', $task->toArray());
+        $this->resource->save($task); /**     The problem is in this line so I don't why,
+                                         * I make some check, $this->resource is an Task(resourceModel) who extends AbstractDb.
+                                         * AbstractDb object have save() method who take an AbstractModel($task in our case) object in parameter...
+                                         * I check the value of my object $task before run this line, this object is good.
+                                         * So now, I don't why is not working, please help me Max
+                                        */
     }
 
     public function delete(TaskInterface $task)

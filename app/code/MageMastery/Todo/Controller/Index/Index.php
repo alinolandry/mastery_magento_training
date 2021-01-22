@@ -13,6 +13,8 @@ use Magento\Framework\Controller\ResultFactory;
 
 class Index extends Action
 {
+    private $logger;
+
     private $taskResource;
 
     private $taskFactory;
@@ -29,7 +31,7 @@ class Index extends Action
      */
     private $taskManagement;
 
-    public function __construct(
+    public function __construct(\Psr\Log\LoggerInterface $logger,
         Context $context,
         TaskFactory $taskFactory,
         TaskResource $taskResource,
@@ -37,6 +39,7 @@ class Index extends Action
         SearchCriteriaBuilder $searchCriteriaBuilder,
         TaskManagementInterface $taskManagement
     ) {
+        $this->logger = $logger;
         $this->taskRepository = $taskRepository;
         $this->taskFactory = $taskFactory;
         $this->taskResource = $taskResource;
@@ -47,14 +50,20 @@ class Index extends Action
 
     public function execute()
     {
-        /*
+
         $task = $this->taskRepository->get(1);
         $task->setData('status', 'complete');
+        //var_dump($task);
 
-        $this->taskManagement->save($task);
+        $this->logger->debug("before run -> here is good", $task->toArray());
+        $this->taskManagement->save($task); // The problem is here
+        $this->logger->debug("after run", $task->toArray());
         //$task = $this->taskRepository->getList($this->searchCriteriaBuilder->create())->getItems();
-        var_dump($this->taskRepository->getList($this->searchCriteriaBuilder->create())->getItems());
-        return;
+        //var_dump($this->taskRepository->getList($this->searchCriteriaBuilder->create())->getItems());
+
+       // var_dump($this->taskRepository->get(1));
+
+        //return;
         /*
         $task = $this->taskFactory->create();
 
